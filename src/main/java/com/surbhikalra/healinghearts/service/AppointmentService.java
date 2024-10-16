@@ -26,6 +26,9 @@ public class AppointmentService {
     public List<Appointment> getAppointmentByClientId(String clientid) {return appointmentRepository.findAppointmentByClientid(clientid);
     }
 
+    public List<Appointment> findAppointmentByAppointmentwith(String hostname) {return appointmentRepository.findAppointmentByAppointmentwith(hostname);
+    }
+
     public void saveAppointment(Appointment appointment) {
         appointmentRepository.save(appointment);
     }

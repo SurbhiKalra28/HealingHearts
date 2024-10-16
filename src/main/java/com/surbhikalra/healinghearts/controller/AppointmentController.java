@@ -11,15 +11,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 //Appointment Controller class to handle all appointment related request
 @Controller
 public class AppointmentController {
+
+    final String path = "/appointment";
 
     @Autowired
     private AppointmentService appointmentService;
 
     //Get all appointments
-    @GetMapping("/appointment")
+    @GetMapping(path)
     public String getAllAppointments(Model model) {
         List<Appointment> appointment = appointmentService.getAllAppointments();
         model.addAttribute("appointment", appointment);
@@ -27,22 +30,34 @@ public class AppointmentController {
     }
 
     //Get all appointments by client
-    @GetMapping("/appointment/{username}")
+    @GetMapping(path+"/{username}")
     public String getAppointmentByClientId(@PathVariable String username, Model model) {
         List<Appointment> appointment = appointmentService.getAppointmentByClientId(username);
+        System.out.println(appointment);
         model.addAttribute("appointment", appointment);
         return "appointment-list";
     }
 
+    //Get all appointments for the person with
+    @GetMapping(path+"/appointmentwith/{hostname}")
+    public String findAppointmentByAppointmentwith(@PathVariable String hostname, Model model) {
+        List<Appointment> appointment = appointmentService.findAppointmentByAppointmentwith(hostname);
+        System.out.println(appointment);
+        model.addAttribute("appointment", appointment);
+        model.addAttribute("appointmentWith", hostname); // Pass the appointmentWith value
+
+        return "appointment-with";
+    }
+
     //Get appointment by its id
-    @GetMapping("/appointment/error/{id}")
+    @GetMapping(path+"/error/{id}")
     public Appointment getAppointmentById(@PathVariable Long id) {
         return appointmentService.getAppointmentById(id)
                 .orElseThrow(() -> new AppointmentNotFoundException("Appointment with id " + id + " not found"));
     }
 
     //Get data for the appointment that needs to be edited
-    @GetMapping("/appointment/edit/{id}")
+    @GetMapping(path+"/edit/{id}")
     public String showEditAppointmentForm(@PathVariable Long id, Model model) {
         Optional<Appointment> optionalAppointment = appointmentService.getAppointmentById(id);
         if (optionalAppointment.isPresent()) {
@@ -55,14 +70,14 @@ public class AppointmentController {
     }
 
     //Handle request for a new appointment booking
-    @GetMapping("/appointment/new")
+    @GetMapping(path+"/new")
     public String showCreateAppointmentForm(Model model) {
         model.addAttribute("appointment", new Appointment());
         return "appointment-form";
     }
 
     //Create new appointment in the model
-    @PostMapping("/appointment/save")
+    @PostMapping(path+"/save")
     public String saveAppointment(@ModelAttribute("appointment") Appointment appointment) {
         if (appointment.getId() != null) {
             appointmentService.updateAppointment(appointment.getId(), appointment);
@@ -73,7 +88,7 @@ public class AppointmentController {
     }
 
     //Delete the existing appointment
-    @GetMapping("/appointment/delete/{id}")
+    @GetMapping(path+"/delete/{id}")
     public String deleteAppointment(@PathVariable Long id,@ModelAttribute("appointment") Appointment appointment) {
         Optional<Appointment> optionalAppointment = appointmentService.getAppointmentById(id);
         String clientId = null;
