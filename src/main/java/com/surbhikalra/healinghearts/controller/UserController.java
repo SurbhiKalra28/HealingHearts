@@ -40,8 +40,6 @@ public class UserController {
 
     @PostMapping("/loginpage")
     public String loginUser(String username, String password, Model model) {
-        System.out.println(username);
-        System.out.println(password);
 
         if (userService.authenticateUser(username, password)) {
             model.addAttribute("loginMessage", "Login successful!");

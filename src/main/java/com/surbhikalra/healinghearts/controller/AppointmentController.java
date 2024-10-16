@@ -1,5 +1,6 @@
 package com.surbhikalra.healinghearts.controller;
 
+import com.surbhikalra.healinghearts.exception.AppointmentNotFoundException;
 import com.surbhikalra.healinghearts.model.Appointment;
 import com.surbhikalra.healinghearts.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +21,23 @@ public class AppointmentController {
     @GetMapping("/appointment")
     public String getAllAppointments(Model model) {
         List<Appointment> appointment = appointmentService.getAllAppointments();
-        System.out.println(appointment);
         model.addAttribute("appointment", appointment);
         return "appointment-list";
     }
 
     @GetMapping("/appointment/{username}")
-    public String getAppointmentsById(@PathVariable String username, Model model) {
-        System.out.println(username);
+    public String getAppointmentByClientId(@PathVariable String username, Model model) {
         List<Appointment> appointment = appointmentService.getAppointmentByClientId(username);
-        System.out.println(appointment);
         model.addAttribute("appointment", appointment);
         return "appointment-list";
     }
+
+    @GetMapping("/appointment/error/{id}")
+    public Appointment getAppointmentById(@PathVariable Long id) {
+        return appointmentService.getAppointmentById(id)
+                .orElseThrow(() -> new AppointmentNotFoundException("Appointment with id " + id + " not found"));
+    }
+
 
     @GetMapping("/appointment/edit/{id}")
     public String showEditAppointmentForm(@PathVariable Long id, Model model) {
