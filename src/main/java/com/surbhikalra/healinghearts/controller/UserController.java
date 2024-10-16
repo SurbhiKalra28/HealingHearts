@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
+//User Controller class to handle all login/register request
 @Controller
 public class UserController {
 

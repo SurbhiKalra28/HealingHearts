@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+//Appointment Controller class to handle all appointment related request
 @Controller
 public class AppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
 
-
+    //Get all appointments
     @GetMapping("/appointment")
     public String getAllAppointments(Model model) {
         List<Appointment> appointment = appointmentService.getAllAppointments();
@@ -25,6 +26,7 @@ public class AppointmentController {
         return "appointment-list";
     }
 
+    //Get all appointments by client
     @GetMapping("/appointment/{username}")
     public String getAppointmentByClientId(@PathVariable String username, Model model) {
         List<Appointment> appointment = appointmentService.getAppointmentByClientId(username);
@@ -32,13 +34,14 @@ public class AppointmentController {
         return "appointment-list";
     }
 
+    //Get appointment by its id
     @GetMapping("/appointment/error/{id}")
     public Appointment getAppointmentById(@PathVariable Long id) {
         return appointmentService.getAppointmentById(id)
                 .orElseThrow(() -> new AppointmentNotFoundException("Appointment with id " + id + " not found"));
     }
 
-
+    //Get data for the appointment that needs to be edited
     @GetMapping("/appointment/edit/{id}")
     public String showEditAppointmentForm(@PathVariable Long id, Model model) {
         Optional<Appointment> optionalAppointment = appointmentService.getAppointmentById(id);
@@ -51,12 +54,14 @@ public class AppointmentController {
         return "appointment-form";
     }
 
+    //Handle request for a new appointment booking
     @GetMapping("/appointment/new")
     public String showCreateAppointmentForm(Model model) {
         model.addAttribute("appointment", new Appointment());
         return "appointment-form";
     }
 
+    //Create new appointment in the model
     @PostMapping("/appointment/save")
     public String saveAppointment(@ModelAttribute("appointment") Appointment appointment) {
         if (appointment.getId() != null) {
@@ -67,6 +72,7 @@ public class AppointmentController {
         return "redirect:/appointment/" + appointment.getClientid();
     }
 
+    //Delete the existing appointment
     @GetMapping("/appointment/delete/{id}")
     public String deleteAppointment(@PathVariable Long id,@ModelAttribute("appointment") Appointment appointment) {
         Optional<Appointment> optionalAppointment = appointmentService.getAppointmentById(id);
