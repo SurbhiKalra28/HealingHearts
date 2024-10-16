@@ -1,0 +1,76 @@
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Contact Options Section */
+.contact-options {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.contact-options h1 {
+    font-size: 36px;
+    color: dodgerblue;
+    margin-bottom: 30px;
+}
+
+.contact-method {
+    margin-bottom: 20px;
+}
+
+.contact-method h3 {
+    font-size: 24px;
+    color: #333;
+}
+
+.contact-method p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.contact-method a {
+    color: dodgerblue;
+    text-decoration: none;
+}
+
+.contact-method a:hover {
+    text-decoration: underline;
+}
+
+/* Map Section */
+.map-section {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.map-section h2 {
+    font-size: 30px;
+    color: dodgerblue;
+    margin-bottom: 20px;
+}
+
+.map-section p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.map-container {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}

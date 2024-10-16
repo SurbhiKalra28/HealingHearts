@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointments</title>
+
+    <link rel="stylesheet" th:href="@{/css/appointment.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Book Appointments</h1>
+    <form  th:action="@{/appointment/save}" th:object="${appointment}" method="post" class="form-group">
+        <label for="clientname">Full Name</label>
+        <input type="text" id="clientname" th:field="*{clientname}" required/>
+
+        <div class="form-group">
+            <label for="clientid">User ID</label>
+            <input type="text" id="clientid" th:field="*{clientid}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="appointmentwith">Appointment</label>
+            <select id="appointmentwith" th:field="*{appointmentwith}" required>
+                <option value="pickone">Pick One</option>
+                <option value="Sarah">Sarah</option>
+                <option value="Shannon">Shannon</option>
+                <option value="Surbhi">Surbhi</option>
+                <option value="Stella">Stella</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="appointmenttype">Service</label>
+            <select id="appointmenttype" th:field="*{type}" required>
+                <option value="chooseone">Pick One</option>
+                <option value="Counselor">Counselor</option>
+                <option value="Attorney">Attorney</option>
+                <option value="Guidance">Guidance</option>
+                <option value="Academic">Academic</option>
+            </select>
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="date">Select Date (Business Days Only)</label>
+            <input type="date" id="date" th:field="*{date}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="time">Select Time (8 AM to 6 PM)</label>
+            <input type="time" id="time" th:field="*{time}" min="08:00" max="18:00" required>
+        </div>
+
+        <button type="submit" class="submit-button">Book Appointment</button>
+    </form>
+    <p id="responseMessage"></p>
+</div>
+
+</body>
+</html>

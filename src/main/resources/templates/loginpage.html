@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+
+</head>
+<body>
+<header>
+    <div class="nav-container d-flex justify-content-between align-items-center">
+        <div class="logo">
+            <a th:href="@{/}"><img src="/images/logo.png" alt="Logo" /></a>
+        </div>
+        <h1>Healing Hearts</h1>
+        <div class="search-box">
+            <input type="text" placeholder="Search...">
+            <button type="submit">Search</button>
+        </div>
+        <div class="user-profile">
+            <a th:href="@{/appointment/{username}(username=${username})}">Appointments</a>
+        </div>
+        <div class="user-profile">
+            <a th:href="@{/contact}">Contact</a>
+        </div>
+        <div class="user-profile">
+            <a th:href="@{/about}">About Us</a>
+        </div>
+        <div class="user-profile">
+            <span th:if="${username != null and username != 'admin'}">
+                Welcome, <strong th:text="${username}"></strong>!
+            </span>
+            <span th:if="${username != null and username != 'admin'}">
+                <a href="/">Logout</a></span>
+            <span th:if="${username == 'admin' or username == null}">
+                <a th:href="@{/loginpage}">Sign In</a> | <a th:href="@{/register}">Register</a></span>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <h2>Login</h2>
+        <form action="#" th:action="@{/loginpage}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+            </div>
+            <button type="submit">Login</button>
+
+        </form>
+        <a th:href="@{/register}"><button class="edit-button">Register</button></a>
+
+        <div th:if="${errorMessage}">
+            <p th:text="${errorMessage}"></p>
+        </div>
+    </div>
+</main>
+</body>
+</html>

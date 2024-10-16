@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Appointments</title>
+    <link rel="stylesheet" th:href="@{/css/appointment-list.css}" />
+
+</head>
+<body class="dark-theme">
+
+
+
+<div class="container" style="margin-top: 5rem;">
+    <h1>Manage Appointments</h1>
+    <span th:if="${username == null or username == 'admin'}">
+        <h2><a th:href="@{/loginpage}">Log In</a></h2>
+        <h2>To Book or Manage Appointments</h2>
+    </span>
+
+    <div class="appointment-grid">
+
+        <div th:each="appointment : ${appointment}" class="appointment-card">
+            <div class="appointment-details">
+                <h2 th:text="${appointment.clientname + ' (' + appointment.clientid + ')'}">Appointment</h2>
+                <p><strong>Type: </strong><span th:text=" ${appointment.type}">Type</span></p>
+                <p><strong>Time: </strong><span th:text=" ${appointment.date} + ' at ' +${appointment.time}">Time</span></p>
+                <p><strong>With: </strong><span th:text=" ${appointment.appointmentwith}">With</span></p>
+            </div>
+            <div class="appointment-actions">
+                <a th:href="@{/appointment/edit/{id}(id=${appointment.id})}" class="edit-button">Edit</a>
+                <a th:href="@{/appointment/delete/{id}(id=${appointment.id})}" class="delete-button">Delete</a>
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <br>
+    <p></p>
+
+    <span th:if="${username != null and username != 'admin'}">
+        <a th:href="@{/appointment/new}"><button type="submit" class="submit-button">Book New Appointment</button></a>
+    </span>
+
+
+</div>
+
+</body>
+</html>
