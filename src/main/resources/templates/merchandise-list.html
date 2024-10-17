@@ -50,25 +50,24 @@
         <h2><a th:href="@{/loginpage}">Log In</a></h2>
         <h2>To Order Merchandise</h2>
     </span>
-
-
+        <span th:if="${username != null and username != 'admin'}">
         <div class="grid-container">
             <div class="card" th:each="merchandise : ${merchandise}">
-                <div class="image-container">
-                    <img th:src="@{/images/abc.png}" th:alt="${merchandise.merchbrand + ' ' + merchandise.merchname}" />
+                <div class="merchlogo">
+                    <img th:src="@{/images/{img}(img=${merchandise.imgurl})}" th:alt="${merchandise.merchbrand + ' ' + merchandise.merchname}" />
                 </div>
                 <div class="details">
                     <h3 th:text="${merchandise.merchbrand + ' ' + merchandise.merchname + ' - $' + merchandise.price}">Merchandise</h3>
                     <p><strong>In Stock: </strong><span th:text=" ${merchandise.availablequantity}">In Stock</span></p>
                 </div>
                 <form th:action="@{/cart/add}" method="post">
-                    <input type="hidden" name="productId" th:value="${merchandise.id}" />
+                    <input type="hidden" name="merchandiseId" th:value="${merchandise.id}" />
                     <input type="number" name="quantity" value="1" min="1" />
                     <button type="submit">Add to Cart</button>
                 </form>
             </div>
         </div>
-
+        </span>
     </div>
 </main>
 <!-- Footer Section -->

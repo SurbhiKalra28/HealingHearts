@@ -19,6 +19,11 @@ public class UserService{
         userRepository.save(user); // Save user to database
     }
 
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
     public boolean authenticateUser(String username, String password) {
         User user = userRepository.findByUsername(username); // Retrieve user by username
         System.out.println(user);
