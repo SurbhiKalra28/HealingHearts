@@ -29,6 +29,12 @@ public class AppointmentController {
         return "appointment-list";
     }
 
+    //Get all appointments
+    @GetMapping(path+"/")
+    public String getFullAppointments(Model model) {
+        return "appointment-list";
+    }
+
     //Get all appointments by client
     @GetMapping(path+"/{username}")
     public String getAppointmentByClientId(@PathVariable String username, Model model) {
