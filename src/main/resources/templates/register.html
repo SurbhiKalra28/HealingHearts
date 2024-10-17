@@ -6,14 +6,53 @@
 
 </head>
 <body>
+
+<!-- Navbar Fragment -->
+<nav class="navbar">
+  <div class="navcontainer">
+    <div class="logo">
+      <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="Logo"></a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="/about-us" th:href="@{/about}">About Us</a></li>
+      <li><a href="/contact" th:href="@{/contact}">Contact</a></li>
+      <li><a href="/appointments" th:href="@{/appointment/{username}(username=${username})}">Appointments</a></li>
+
+      <!-- Search Box -->
+      <form class="search-box" action="/search" method="get">
+        <input type="text" name="query" placeholder="Search...">
+        <button type="submit">Search</button>
+      </form>
+
+
+      <span th:if="${username != null and username != 'admin'}">
+                <li><a href="/">Welcome, <strong th:text="${username}"> </strong></a></li></span>
+      <span th:if="${username != null and username != 'admin'}">
+                <li><a href="/">Logout</a></li></span>
+      <span th:if="${username == 'admin' or username == null}">
+                <li><a href="/loginpage" th:href="@{/loginpage}">Login</a></li></span>
+      <span th:if="${username == 'admin' or username == null}">
+                <li><a href="/register" th:href="@{/register}">Register</a></li></span>
+
+    </ul>
+
+
+  </div>
+</nav>
+<main>
 <div class="container">
   <h2>Register</h2>
-  <form action="#" th:action="@{/register}" th:object="${user}" method="post">
+  <form id="signupForm" action="#" th:action="@{/register}" th:object="${user}" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" th:field="*{username}" required><br><br>
 
     <label for="password">Password:</label>
     <input type="password" id="password" th:field="*{password}" required><br><br>
+    <div class="error-message" id="passwordError">Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.</div>
+
+
+    <br>
 
     <label for="email">Email:</label>
     <input type="email" id="email" th:field="*{email}" required><br><br>
@@ -26,5 +65,8 @@
     <p th:text="${successMessage}"></p>
   </div>
 </div>
+
+<script src="../js/validation.js"></script>
+</main>
 </body>
 </html>
