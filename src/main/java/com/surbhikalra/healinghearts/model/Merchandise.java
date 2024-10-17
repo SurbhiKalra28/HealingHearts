@@ -17,6 +17,7 @@ public class Merchandise {
 
     private String merchbrand;
     private String merchname;
+    private String imgurl;
     private double price;
     private int availablequantity;
 }
