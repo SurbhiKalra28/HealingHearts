@@ -8,6 +8,41 @@
 </head>
 <body>
 
+
+<!-- Navbar Fragment -->
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="Logo"></a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a th:href="@{/about}">About Us</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+            <li><a th:href="@{/appointment/{username}(username=${username})}">Appointments</a></li>
+
+            <!-- Search Box -->
+            <form class="search-box" action="/search" method="get">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+
+
+            <span th:if="${username != null and username != 'admin'}">
+                <li><a href="/">Welcome, <strong th:text="${username}"> </strong></a></li></span>
+            <span th:if="${username != null and username != 'admin'}">
+                <li><a href="/">Logout</a></li></span>
+            <span th:if="${username == 'admin' or username == null}">
+                <li><a href="/loginpage" th:href="@{/loginpage}">Login</a></li></span>
+            <span th:if="${username == 'admin' or username == null}">
+                <li><a href="/register" th:href="@{/register}">Register</a></li></span>
+
+        </ul>
+
+
+    </div>
+</nav>
+<main>
 <div class="container">
     <!-- Contact Options Section -->
     <section class="contact-options">
@@ -33,6 +68,6 @@
         </div>
     </section>
 </div>
-
+</main>
 </body>
 </html>
