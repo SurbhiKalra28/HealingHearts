@@ -54,6 +54,7 @@
             <button class="add-button" type="submit">Login</button>
 
         </form>
+        <label th:align="center">Don't have an account?</label>
         <a th:href="@{/register}"><button class="edit-button">Register</button></a>
 
         <div th:if="${errorMessage}">

@@ -69,7 +69,8 @@
 
     <button class="add-button"  type="submit">Register</button>
   </form>
-  <a th:href="@{/loginpage}"><button class="edit-button">Login Page</button></a>
+  <label th:align="center">Already have an account?</label>
+  <a th:href="@{/loginpage}"><button class="edit-button">Login</button></a>
 
   <div th:if="${successMessage}">
     <p th:text="${successMessage}"></p>
