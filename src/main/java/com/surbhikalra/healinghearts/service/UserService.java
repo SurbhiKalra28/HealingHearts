@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.surbhikalra.healinghearts.model.User;
 import com.surbhikalra.healinghearts.repository.UserRepository;
+import com.surbhikalra.healinghearts.exception.UserNotFoundException;
 
 @Service
 public class UserService{
@@ -25,6 +26,7 @@ public class UserService{
     }
 
     public boolean authenticateUser(String username, String password) {
+
         User user = userRepository.findByUsername(username); // Retrieve user by username
         System.out.println(user);
         System.out.println(user.getPassword());

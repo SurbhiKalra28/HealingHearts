@@ -19,12 +19,22 @@ public class MerchandiseController {
     private MerchandiseService merchandiseService;
 
     //Get all appointments
-    @GetMapping("merchandise")
+    @GetMapping("/merchandise")
     public String getAllMerchandise(Model model) {
         List<Merchandise> merchandise = merchandiseService.getAllMerchandise();
         model.addAttribute("merchandise", merchandise);
         return "merchandise-list";
     }
+
+    //Get all appointments
+    @GetMapping("/merchandise/")
+    public String getAllMerchandise2(Model model) {
+        List<Merchandise> merchandise = merchandiseService.getAllMerchandise();
+        model.addAttribute("merchandise", merchandise);
+        return "merchandise-list";
+    }
+
+
 
     //Get all appointments by client
     @GetMapping("merchandise/{username}")

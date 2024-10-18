@@ -11,14 +11,20 @@
 <!-- Navbar Fragment -->
 <nav class="navbar">
     <div class="navcontainer">
-        <div class="logo">
-            <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="Logo"></a>
-        </div>
+        <ul class="nav-links">
+
+            <div class="logo">
+                <a th:href="@{/{username}(username=${username})}"><img th:src="@{/images/logo.png}" alt="Logo"></a>
+            </div></li>
+            <li><h2>Healing Hearts</h2></li>
+            <li>
+        </ul>
 
         <ul class="nav-links">
-            <li><a href="/about-us" th:href="@{/about}">About Us</a></li>
-            <li><a href="/contact" th:href="@{/contact}">Contact</a></li>
-            <li><a href="/appointments" th:href="@{/appointment/{username}(username=${username})}">Appointments</a></li>
+            <li><a th:href="@{/about/{username}(username=${username})}">About Us</a></li>
+            <li><a th:href="@{/contact/{username}(username=${username})}">Contact</a></li>
+            <li><a th:href="@{/merchandise/{username}(username=${username})}">Shop</a></li>
+            <li><a th:href="@{/appointment/{username}(username=${username})}">Appointments</a></li>
 
             <!-- Search Box -->
             <form class="search-box" action="/search" method="get">

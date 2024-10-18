@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,13 +13,17 @@
 <!-- Navbar Fragment -->
 <nav class="navbar">
     <div class="navcontainer">
-        <div class="logo">
-            <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="Logo"></a>
-        </div>
-
         <ul class="nav-links">
-            <li><a th:href="@{/about}">About Us</a></li>
-            <li><a th:href="@{/contact}">Contact</a></li>
+
+        <div class="logo">
+            <a th:href="@{/{username}(username=${username})}"><img th:src="@{/images/logo.png}" alt="Logo"></a>
+        </div></li>
+            <li><h2>Healing Hearts</h2></li>
+            <li>
+        </ul>
+        <ul class="nav-links">
+            <li><a th:href="@{/about/{username}(username=${username})}">About Us</a></li>
+            <li><a th:href="@{/contact/{username}(username=${username})}">Contact</a></li>
             <li><a th:href="@{/merchandise/{username}(username=${username})}">Shop</a></li>
             <li><a th:href="@{/appointment/{username}(username=${username})}">Appointments</a></li>
 

@@ -21,4 +21,6 @@ public class MerchandiseService {
     public Optional<Merchandise> getMerchandiseById(Long id) {
         return merchandiseRepository.findById(id);
     }
+
+
 }
